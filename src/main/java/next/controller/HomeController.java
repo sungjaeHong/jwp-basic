@@ -10,6 +10,7 @@ public class HomeController implements Controller {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		req.setAttribute("users", DataBase.findAll());
+		System.out.println("homeController");
 		return "index.jsp";
 	}
 }
