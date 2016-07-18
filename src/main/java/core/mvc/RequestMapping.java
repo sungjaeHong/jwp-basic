@@ -30,7 +30,8 @@ public class RequestMapping {
 		mappings.put("/users/create", new CreateUserController());
 		mappings.put("/users/updateForm", new UpdateFormUserController());
 		mappings.put("/users/update", new UpdateUserController());
-
+		//logoutController
+		
 		logger.info("Initialized Request Mapping!");
 	}
 

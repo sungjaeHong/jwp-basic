@@ -5,15 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import core.db.DataBase;
 import core.mvc.Controller;
+import next.dao.UserDao;
 
 public class ListUserController implements Controller {
+	UserDao dao = new UserDao();
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if (!UserSessionUtils.isLogined(req.getSession())) {
 			return "redirect:/users/loginForm";
 		}
-		
-		req.setAttribute("users", DataBase.findAll());
+		System.out.println("user Dao");
+		req.setAttribute("users", dao.findAll());
 		return "/user/list.jsp";
 	}
 }

@@ -14,6 +14,7 @@ public class UserDao {
 	public void insert(User user) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		//공통부분 : connection preparedStatement resultset
 		try {
 			con = ConnectionManager.getConnection();
 			String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
@@ -71,9 +72,11 @@ public class UserDao {
 			String sql = "SELECT userid, password, name, email from USERS";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+			int i=0;
+			System.out.println(rs);
 			while(rs.next()){
-				
+				System.out.println(i++);
+				user.add(new User(rs.getString("userid"),rs.getString("password"),rs.getString("name"),rs.getString("email")));
 			}
 			
 		} finally {
@@ -85,7 +88,8 @@ public class UserDao {
 				con.close();
 			}
 		}
-		return new ArrayList<User>();
+		System.out.println(user.get(0).getUserId());
+		return user;
 	}
 
 	public User findByUserId(String userId) throws SQLException {

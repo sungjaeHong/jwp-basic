@@ -8,11 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import core.db.DataBase;
 import core.mvc.Controller;
+import next.dao.UserDao;
 import next.model.User;
 
 public class UpdateUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
-
+    UserDao dao = new UserDao();
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		User user = DataBase.findUserById(req.getParameter("userId"));
@@ -26,7 +27,7 @@ public class UpdateUserController implements Controller {
 				req.getParameter("name"),
 				req.getParameter("email"));
 		log.debug("Update User : {}", updateUser);
-		user.update(updateUser);
+		dao.update(updateUser);
 		return "redirect:/";
 	}
 }
